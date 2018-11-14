@@ -1,0 +1,74 @@
+//Install react dependancies
+npm install create-react-app -g
+//Create app specify name, can specify path
+npx create-react-app my-app
+//Go to directory with app
+cd my-app
+//Start development server
+npm start
+
+//Testing with jest
+		//Setup
+			//Import jest
+			npm i @types/jest
+			//Install jest, --save putw the package in package.json
+			npm install --save-dev jest
+			//Install jest-fetch-mock
+			npm install --save-dev jest-fetch-mock
+			//Install enzyme
+			npm i --save-dev enzyme enzyme-adapter-react-16
+	
+			//Run test 
+			npm test 
+			npm test --file_name/path
+
+//Using webtest.io (don't install in project folder (webpackage update problem))
+    //Install it client for it
+        npm install wt-cli
+    //Initilize wt
+    wt init
+    //Create first webhook, this will make a file and a browser
+    echo "module.exports = function (cb) {cb(null, 'Hello');}" > hello.js
+    wt create hello.js
+    //Open webhook in browser application
+    wt edit hello
+    //Update file (if you edit it locally)
+
+
+//Using npm the package manager
+    //Remove package
+       npm uninstall <name> removes the module from node_modules, but not package.json
+       npm uninstall <name> --save also removes it from dependencies in package.json
+       npm uninstall <name> --save-dev also removes it from devDependencies in package.json
+       npm -g uninstall <name> --save also removes it globally
+	//Run a script
+		npm run [script]
+	//Create a build with github pages
+		//git setup
+			//Create repositary at Github.com
+			//Convert local react project to a git repositary
+				git init
+			    git add .
+				git commit -m "initial commit"
+			//Add the created repositary as a remote repositarty
+				git remote add origin https://github.com/Ethan1745/tania_guide
+			//Push local repositary to the remote one
+				git push origin master
+				// If error pull the repositary 
+				git pull  https://github.com/Ethan1745/tania_guide master --allow-unrelated-histories
+
+		//npm setup
+			//then add a homepage field to package.json (url thet the app lives on):
+				"homepage": "https://Ethan1745.github.io/tania_guide/",
+			//then add scripts for target
+				"scripts": {
+				"predeploy": "npm run build",
+				"deploy": "gh-pages -d build"
+				}
+			//Add dependancies for deployment method/target  EG githib pages
+				npm install --save-dev gh-pages
+			//Run build
+				npm run build
+			//Deploy to target EG github pages  (Carry out git setup before this command)
+				npm run deploy
+		
