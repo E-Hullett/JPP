@@ -3,6 +3,7 @@ import Footer from '../widgets/Footer'
 import NavBar from '../widgets/NavBar'
 import Jumbotron from '../widgets/Jumbotron'
 
+//TODO Generate unique id's for every customer
 //TODO Update Navbar 2 and thsi component, find a way to keep the user logged in after the page refreshes
 
 export default class Home2 extends Component {
