@@ -1,0 +1,59 @@
+CREATE TABLE public.appointments
+(
+    appointment_id SERIAL,
+    user_id character(32) NOT NULL,
+    title text,
+    date date,
+    start_time time,
+    end_time time,
+    breed_standard text,
+    coat_removal text,
+    handstrip bool,
+    fee NUMERIC(2),
+    notes text,
+    CONSTRAINT appointments_pk PRIMARY KEY (appointment_id),
+    CONSTRAINT appointments_fkey FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+COMMENT ON TABLE public.appointments
+    IS 'Contains customer appointments for JPP';
+
+
+
+
+
+
+
+
+CREATE SEQUENCE appointments_ui;
+CREATE TABLE public.appointments
+(
+    tally integer NOT NULL DEFAULT nextval('appointments_ui'::regclass),
+    user_id character(32) COLLATE pg_catalog."default" NOT NULL,
+    appointment1 json,
+    appointment2 json,
+    appointment3 json,
+    appointment4 json,
+    appointment5 json,
+    appointment6 json,
+    appointment7 json,
+    appointment8 json,
+    appointment9 json,
+    appointment10 json,
+    CONSTRAINT appointments_pk PRIMARY KEY (user_id)
+)
+WITH (
+    OIDS = FALSE
+)
+
+TABLESPACE pg_default;
+
+ALTER SEQUENCE appointments_ui OWNED BY appointments.tally;
+
+ALTER TABLE public.appointments
+    OWNER to postgres;
+COMMENT ON TABLE public.appointments
+    IS 'Contains customer appointments for JPP';
+
+
+
+

@@ -1,0 +1,72 @@
+//Explanation
+    //The goal of this app is to create a server and a react app within the same project, make use of a postgres SQL database, deploy it on heroku
+    //There will be a main package.json file and a package.json file for react.
+    //The client folder will hold all react files, the server folder will hold all express-related files
+
+//Setup file system
+    //Create parent directory
+    //Create server child directory  (the client sub-direcotry is created by create-react app)
+
+//Seting up the server
+    npm init
+    npm install body-parser cookie-parser express pg request request-promise --save
+    npm install concurrently nodemon --save-dev
+    //setup express server within the server folder
+//Setting up client
+    cd [parent directory]
+    npx create-react-app client
+    cd client
+    npm install reactstrap
+    //Make sure that all npm installs for the react front-end are in the client folder, so that the react package-json gets them
+
+    //setup react frontend
+//Installing npm modules
+
+
+//Initial git setup
+    //Created online git repo
+    //Added node to .gitignore
+
+    git init
+    git remote add origin https://github.com/Ethan1745/weather_app
+    echo node_modules > .gitignore
+    git add .
+    git commit -m "initial commit"
+    git push origin master -f
+
+npm install body-parser --save
+npm install express
+npm install pg
+
+//Run server
+node src/server/index.js
+//add above command to scripts, hence can be run as: npm run server
+
+//Combine react script and express server
+npm install concurrently --save
+//package.json, "dev": "concurrently \"npm run server\" \"npm run start\""
+npm run dev
+
+
+//Use pgAdmin to create local database
+//Fill that local db using SQL queries (with the Query Tool)
+
+//Deploy to heroku
+Use heroku_commands.txt
+
+//Add postgres to path
+C:\Program Files\PostgreSQL\10\bin
+
+
+
+
+
+
+//Setting up multiple pages
+    cd client
+    npm install react-router
+    //add routes.js
+
+
+//Copy this project
+    cp -r C:\Users\emera\Desktop\IT\Codeing\HTML, CSS, JavaScript\React\JPP

@@ -1,0 +1,15 @@
+.jumbotron {
+  background-image: url(../../images/JoAndPug.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  color: white;
+  min-height: 300px;
+}
+
+#JumbtronTitle{
+  color: white;
+}
+#JumbtronSubTitle{
+  color: white;
+}

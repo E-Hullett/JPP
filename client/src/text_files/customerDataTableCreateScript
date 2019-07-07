@@ -1,0 +1,445 @@
+
+CREATE TABLE customer_data
+(
+    count SERIAL,
+    user_id character(32) NOT NULL,
+    address text,
+    mobile text,
+    pets_name text,
+    dob date,
+    breed text,
+    gender text,
+    colour text,
+    microchip_number text,
+    tattoo_location text,
+    neutralised_b BOOL,
+    vet_name text,
+    vet_mobile text,
+    emergency_contact_name text,
+    emergency_contact_relationship text,
+    emergency_contact_mobile text,
+    preferences_dislikes text,
+    preferences_likes text,
+    shampoo text,
+    sheer_number_in_winter text,
+    sheer_number_in_summer text,
+    other_useful_details text,
+    fleas integer,
+    mite integer,
+    worms integer,
+    ticks integer,
+    lice integer,
+    mange integer,
+    cough integer,
+    long_worm integer,
+    other_contagion text,
+    heart integer,
+    sight integer,
+    ears integer,
+    balance integer,
+    a_glandis integer,
+    ringworm integer,
+    hip_dysp integer,
+    eczema integer,
+    allergies integer,
+    arthritis integer,
+    diabetes integer,
+    incontinence integer,
+    warts integer,
+    other_health text,
+    shy integer,
+    good integer,
+    noisy integer,
+    fights integer,
+    soils_waste integer,
+    escapes integer,
+    highly_strung integer,
+    bite integer,
+    muzzle integer,
+    climbs integer,
+    chewy integer,
+    other_behaviour text,
+    date_current date,
+    CONSTRAINT customer_data_pk PRIMARY KEY (count),
+    CONSTRAINT customer_data_fkey FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+COMMENT ON TABLE customer_data
+    IS 'Contains data on JPP users';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.customer_data
+
+-- DROP TABLE public.customer_data;
+
+CREATE SEQUENCE user_id_seq2;
+CREATE TABLE public.customer_data
+(
+    tally integer NOT NULL DEFAULT nextval('user_id_seq2'::regclass),
+    user_id character(32) COLLATE pg_catalog."default" NOT NULL,
+    address text COLLATE pg_catalog."default",
+    mobile text COLLATE pg_catalog."default",
+    pets_name text COLLATE pg_catalog."default",
+    dob date,
+    breed text COLLATE pg_catalog."default",
+    gender text COLLATE pg_catalog."default",
+    colour text COLLATE pg_catalog."default",
+    microchip_number text COLLATE pg_catalog."default",
+    tattoo_location text COLLATE pg_catalog."default",
+    neutralised_b BOOL,
+    vet_name text COLLATE pg_catalog."default",
+    vet_mobile text COLLATE pg_catalog."default",
+    emergency_contact_name text COLLATE pg_catalog."default",
+    emergency_contact_relationship text COLLATE pg_catalog."default",
+    emergency_contact_mobile text COLLATE pg_catalog."default",
+    preferences_dislikes text COLLATE pg_catalog."default",
+    preferences_likes text COLLATE pg_catalog."default",
+    shampoo text COLLATE pg_catalog."default",
+    sheer_number_in_winter text COLLATE pg_catalog."default",
+    sheer_number_in_summer text COLLATE pg_catalog."default",
+    other_useful_details text COLLATE pg_catalog."default",
+    fleas integer,
+    mite integer,
+    worms integer,
+    ticks integer,
+    lice integer,
+    mange integer,
+    cough integer,
+    long_worm integer,
+    other_contagion text,
+    heart integer,
+    sight integer,
+    ears integer,
+    balance integer,
+    a_glandis integer,
+    ringworm integer,
+    hip_dysp integer,
+    eczema integer,
+    allergies integer,
+    arthritis integer,
+    diabetes integer,
+    incontinence integer,
+    warts integer,
+    other_health text,
+    shy integer,
+    good integer,
+    noisy integer,
+    fights integer,
+    soils_waste integer,
+    escapes integer,
+    highly_strung integer,
+    bite integer,
+    muzzle integer,
+    climbs integer,
+    chewy integer,
+    other_behaviour text,
+    date_current date,
+    CONSTRAINT customerdata_pk PRIMARY KEY (user_id)
+)
+WITH (
+    OIDS = FALSE
+)
+
+TABLESPACE pg_default;
+
+ALTER SEQUENCE user_id_seq2 OWNED BY customer_data.tally;
+
+ALTER TABLE public.customer_data
+    OWNER to postgres;
+COMMENT ON TABLE public.customer_data
+    IS 'Contains main data on JPP users';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.customer_data
+
+-- DROP TABLE public.customerdata;
+
+CREATE SEQUENCE user_id_seq;
+CREATE TABLE public.customer_data
+(
+    count integer NOT NULL DEFAULT nextval('user_id_seq'::regclass),
+    user_id character(36) COLLATE pg_catalog."default" NOT NULL,
+    pets_name text COLLATE pg_catalog."default",
+    current_date date,
+    animal text COLLATE pg_catalog."default",
+    dob date,
+    breed text COLLATE pg_catalog."default",
+    male integer,
+    female integer,
+    colour text COLLATE pg_catalog."default",
+    owner text COLLATE pg_catalog."default",
+    address text COLLATE pg_catalog."default",
+    mobile text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default",
+    microchip_number text COLLATE pg_catalog."default",
+    tattoo_location text COLLATE pg_catalog."default",
+    neutralised_b integer,
+    vet_name text COLLATE pg_catalog."default",
+    vet_mobile text COLLATE pg_catalog."default",
+    emergency_contact_name text COLLATE pg_catalog."default",
+    emergency_contact_relationship text COLLATE pg_catalog."default",
+    emergency_contact_mobile text COLLATE pg_catalog."default",
+    preferences_dislikes_y integer,
+    preferences_dislikes text COLLATE pg_catalog."default",
+    preference_likes_y integer,
+    preferences_likes text COLLATE pg_catalog."default",
+    shampoo text COLLATE pg_catalog."default",
+    sheer_number_in_winter text COLLATE pg_catalog."default",
+    sheer_number_in_summer text COLLATE pg_catalog."default",
+    other_useful_details text COLLATE pg_catalog."default",
+    fleas integer,
+    mite integer,
+    worms integer,
+    ticks integer,
+    lice integer,
+    mange integer,
+    cough integer,
+    long_worm integer,
+    other_contagion integer,
+    heart integer,
+    sight integer,
+    ears integer,
+    balance integer,
+    a_glandis integer,
+    ringworm integer,
+    hip_dysp integer,
+    eczema integer,
+    allergies integer,
+    arthritis integer,
+    diabetes integer,
+    incontinence integer,
+    warts integer,
+    shy integer,
+    good integer,
+    noisy integer,
+    fights integer,
+    soils_waste integer,
+    escapes integer,
+    highly_strung integer,
+    bite integer,
+    muzzle integer,
+    climbs integer,
+    chewy integer,
+    other_behaviour integer,
+    behaviour_notes integer,
+    health_notes integer,
+    CONSTRAINT customerdata_pk PRIMARY KEY (user_id)
+)
+WITH (
+    OIDS = FALSE
+)
+
+TABLESPACE pg_default;
+
+ALTER SEQUENCE user_id_seq OWNED BY users.count;
+
+ALTER TABLE public.users
+    OWNER to postgres;
+COMMENT ON TABLE public.users
+    IS 'Contains main data on JPP users';

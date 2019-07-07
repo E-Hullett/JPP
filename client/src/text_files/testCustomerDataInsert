@@ -1,0 +1,13 @@
+INSERT INTO public.customer_data(
+                      count, user_id, address, mobile, pets_name, dob, breed, gender, colour, microchip_number,
+                      tattoo_location, neutralised_b, vet_name, vet_mobile, emergency_contact_name,
+                      emergency_contact_relationship, emergency_contact_mobile,
+                      preferences_dislikes, preferences_likes, shampoo, sheer_number_in_winter,
+                      sheer_number_in_summer, other_useful_details, fleas, mite, worms, ticks, lice, mange,
+                      cough, long_worm, other_contagion, heart, sight, ears, balance, a_glandis, ringworm, hip_dysp,
+                      eczema, allergies, arthritis, diabetes, incontinence, warts, other_health, shy, good, noisy,
+                      fights, soils_waste, escapes, highly_strung, bite, muzzle, climbs, chewy, other_behaviour, date_current)
+                      VALUES (1, '81fcbdf3-ad18-493a-a9bc-6a22512fa13c', 'test', '343444', 'test', '2001-07-19' , 'test', 1, 'test',
+                      '3453543', 'test', true, 'test', 353453, 'test', 'test', 345353, 'test', 'test', 'test', 9, 9, 'test',
+                      0, 0, 0, 0, 0, 0, 0, 0, 'test', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'test', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                      'test', '2018-12-10');

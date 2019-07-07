@@ -1,0 +1,16 @@
+#topLevelNav{
+  color: black;
+    background-color: black;
+}
+#NavBarJPPLogo{
+    height: auto;
+    width: auto;
+}
+
+.navbar-default{
+    color: #333333;
+    background-color: black;
+}
+.nav-link{
+    color: white;
+}

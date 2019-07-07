@@ -1,0 +1,4 @@
+ <FormGroup controlId="haveTattoo_b" bsSize="large">
+                                <ControlLabel>Does your dog have a tattoo?</ControlLabel>
+                                <input type="radio" value="option1" checked={this.state.dataForm.haveTattoo_b === true} onChange={this.handleChange} />
+                            </FormGroup>

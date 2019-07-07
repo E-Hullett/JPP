@@ -1,0 +1,6 @@
+/*Set width of calendar container(because the calendar adapts to the parent container (with no width it won't show properly at all))*/
+#AC_Container {
+    width: 800px;
+    height: 550px;
+    margin:0 auto;
+}

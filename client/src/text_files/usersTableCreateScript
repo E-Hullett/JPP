@@ -1,0 +1,67 @@
+CREATE TABLE users
+(
+    count SERIAL,
+    user_id character(36) NOT NULL,
+    email text,
+    username text,
+    password text,
+    status text,
+    CONSTRAINT users_pkey PRIMARY KEY (user_id)
+
+)
+COMMENT ON TABLE users
+    IS 'Contains users accounts';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.users
+
+-- DROP TABLE public.users;
+CREATE SEQUENCE user_id_seq;
+CREATE TABLE public.users
+(
+    count integer NOT NULL DEFAULT nextval('user_id_seq'::regclass),
+    user_id character(36) COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default",
+    username text COLLATE pg_catalog."default",
+    password text COLLATE pg_catalog."default",
+    status text COLLATE pg_catalog."default",
+    CONSTRAINT users_pkey PRIMARY KEY (user_id)
+    CONSTRAINT users_fkey FOREIGN KEY (user_id) REFERENCES customer_data(user_id) ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER SEQUENCE user_id_seq OWNED BY users.count;
+
+ALTER TABLE public.users
+    OWNER to postgres;
+COMMENT ON TABLE public.users
+    IS 'JPP login details for users';
