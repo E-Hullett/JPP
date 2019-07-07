@@ -15,10 +15,10 @@ export default class DataForm extends Component {
         this.state.appointmentData = {
             title: "",
             date: "",
-            start_time: "",
-            end_time: "",
-            breed_standard: "",
-            coat_removal: "",
+            startTimeHours: "",
+            startTimeMinutes: "",
+            breedStandard: "",
+            coatRemoval: "",
             handstrip: false,
             notes: ""
         };
@@ -116,7 +116,7 @@ export default class DataForm extends Component {
                     </p>
                     <div className ="FormContainer">
                         <form onSubmit={this.handleSubmit}>
-                            <div> Give us the infomation to contact you</div>
+                            <div> Give us the information to contact you</div>
                             <FormGroup controlId="title" bsSize="large">
                                 <ControlLabel>Address</ControlLabel>
                                 <FormControl
@@ -126,6 +126,31 @@ export default class DataForm extends Component {
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
+
+                            <div className="row">
+                                <p>Enter the appointment starting time</p>
+                                <div className="col-md-3">
+                                    <FormGroup controlId="startTimeHours" bsSize="large">
+                                        <ControlLabel>Enter hours</ControlLabel>
+                                        <FormControl
+                                            autoFocus
+                                            type="text"
+                                            value={this.state.appointmentData.startTimeHours}
+                                            onChange={this.handleChange}
+                                        />
+                                    </FormGroup>
+                                </div>
+                                <div className="col-md-3">
+                                    <FormGroup controlId="startTimeMinutes" bsSize="large">
+                                        <ControlLabel>Enter minutes</ControlLabel>
+                                        <FormControl
+                                            autoFocus
+                                            type="text"
+                                            value={this.state.appointmentData.startTimeMinutes}
+                                            onChange={this.handleChange}
+                                        />
+                                </div>
+                            </div>
 
                             <FormGroup controlId="date" bsSize="large">
                                 <ControlLabel>Appointment date</ControlLabel>
@@ -150,21 +175,21 @@ export default class DataForm extends Component {
                                 />
                             </FormGroup>
 
-                            <FormGroup controlId="breed_standard" bsSize="large">
-                                <ControlLabel>Enter breed standard infomation</ControlLabel>
+                            <FormGroup controlId="breedStandard" bsSize="large">
+                                <ControlLabel>Enter breed standard information</ControlLabel>
                                 <FormControl
                                     autoFocus
                                     type="text"
-                                    value={this.state.appointmentData.breed_standard}
+                                    value={this.state.appointmentData.breedStandard}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
-                            <FormGroup controlId="coat_removal" bsSize="large">
+                            <FormGroup controlId="coatRemoval" bsSize="large">
                                 <ControlLabel>Address</ControlLabel>
                                 <FormControl
                                     autoFocus
                                     type="text"
-                                    value={this.state.appointmentData.coat_removal}
+                                    value={this.state.appointmentData.coatRemoval}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
@@ -179,5 +204,6 @@ export default class DataForm extends Component {
                 </div>
             </div>
         )
+
     }
 }
