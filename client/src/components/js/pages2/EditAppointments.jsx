@@ -117,32 +117,32 @@ export default class DataForm extends Component {
                     <div className ="FormContainer">
                         <form onSubmit={this.handleSubmit}>
                             <div> Give us the infomation to contact you</div>
-                            <FormGroup controlId="address" bsSize="large">
+                            <FormGroup controlId="title" bsSize="large">
                                 <ControlLabel>Address</ControlLabel>
                                 <FormControl
                                     autoFocus
                                     type="text"
-                                    value={this.state.dataForm.address}
+                                    value={this.state.appointmentData.title}
                                     onChange={this.handleChange}
                                 />
                             </FormGroup>
 
-                            <FormGroup controlId="DOB" bsSize="large">
-                                <ControlLabel>Date of birth</ControlLabel>
+                            <FormGroup controlId="date" bsSize="large">
+                                <ControlLabel>Appointment date</ControlLabel>
                                 <p>
                                     {this.state.datePicker.isEmpty && 'Please type or pick a day'}
-                                    {!this.state.datePicker.isEmpty && !this.state.dataForm.DOB && 'This day is invalid'}
-                                    {this.state.dataForm.DOB && this.state.datePicker.isDisabled && 'This day is disabled'}
-                                    {this.state.dataForm.DOB && !this.state.datePicker.isDisabled}
+                                    {!this.state.datePicker.isEmpty && !this.state.appointmentData.date && 'This day is invalid'}
+                                    {this.state.appointmentData.date && this.state.datePicker.isDisabled && 'This day is disabled'}
+                                    {this.state.appointmentData.date && !this.state.datePicker.isDisabled}
                                     {/*&& `You chose ${this.state.dataForm.DOB.toLocaleDateString()}`} */   }
                                 </p>
                                 <DayPickerInput
                                     id="DOB"
-                                    value={this.state.dataForm.DOB}
+                                    value={this.state.appointmentData.date}
                                     onDayChange={this.handleDayChange}
                                     dayPickerProps={{
                                         id: "DOB",
-                                        selectedDays: this.state.dataForm.DOB,
+                                        selectedDays: this.state.appointmentData.date,
                                         disabledDays: {
                                             daysOfWeek: [0, 0],
                                         },
@@ -150,15 +150,28 @@ export default class DataForm extends Component {
                                 />
                             </FormGroup>
 
-                            <FormGroup controlId="haveTattoo_b" bsSize="large">
-                                <ControlLabel>Does your dog have a tattoo?</ControlLabel>
-                                {/* <Checkbox value={this.state.dataForm.haveTattoo_b} onClick={ ()=> { this.setState({dataForm:{haveTattoo_b: !this.state.haveTattoo_b}}); console.log(this.state.dataForm.haveTattoo_b)} }>Yes</Checkbox> */}
-                                <Checkbox id="haveTattoo_b" checked={this.state.dataForm.haveTattoo_b} onChange={this.handleToggle} > Yes </Checkbox>
+                            <FormGroup controlId="breed_standard" bsSize="large">
+                                <ControlLabel>Enter breed standard infomation</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    type="text"
+                                    value={this.state.appointmentData.breed_standard}
+                                    onChange={this.handleChange}
+                                />
                             </FormGroup>
-
-
-
-
+                            <FormGroup controlId="coat_removal" bsSize="large">
+                                <ControlLabel>Address</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    type="text"
+                                    value={this.state.appointmentData.coat_removal}
+                                    onChange={this.handleChange}
+                                />
+                            </FormGroup>
+                            <FormGroup controlId="handstrip" bsSize="large">
+                                <ControlLabel>Does your dog need a handstrip</ControlLabel>
+                                <Checkbox id="handstrip" checked={this.state.appointmentData.handstrip} onChange={this.handleToggle} > Yes </Checkbox>
+                            </FormGroup>
 
 
                         </form>
