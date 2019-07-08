@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from "../widgets/NavBar";
 import {Button, ControlLabel, FormControl, FormGroup, Checkbox} from "react-bootstrap";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import moment from 'moment'
 import 'react-day-picker/lib/style.css';
 //import update from 'immutability-helper';
 //import Jumbotron from "../widgets/Jumbotron";
@@ -56,6 +57,8 @@ export default class DataForm extends Component {
     //Call function as soon as the DOM is rendered, but only once (not run again until page refresh)
     componentDidMount(){
         this.alreadySubmittedAForm()
+        let errorList = ["No error check yet performed"]
+        this.setState({errorList: errorList})
     }
 
     //Check if the user has already submitted a dataForm
@@ -201,6 +204,12 @@ export default class DataForm extends Component {
                 break;
             }
         }
+        /*
+        //Check address
+        if (!("/+@+/".test(this.state.dataForm.address))) errorList.push("Address is invalid");
+        */
+
+
         //Check DOB is valid
         if (!(/\d{4}[-]\d{1,2}[-]\d{1,2}$/).test(DF.DOB))errorList.push("Incorrect format for DOB")
         let parts = DF.DOB.split("-")
@@ -276,6 +285,7 @@ export default class DataForm extends Component {
         //Check if selection boxes have been left blank, if they have the insert 0s for all values
 
         //Configure DOB to correct format
+        /*
         let splitDate = this.state.dataForm.DOB.toString().split(' ')
         //Convert month to a number
         let monthNumber = 0
@@ -288,6 +298,9 @@ export default class DataForm extends Component {
         }
         let convertedDate = `${splitDate[3]}-${monthNumber}-${splitDate[2]}`
         dataForm.DOB = convertedDate
+        */
+        dataForm.DOB = moment(this.state.dataForm.DOB).format('DD-MM-YYYY');
+
 
         //Get current date and format it
         // Format DOB selected, previous format for DOB: Thu Dec 06 2018 12:00:00 GMT+0000 (Greenwich Mean Time)

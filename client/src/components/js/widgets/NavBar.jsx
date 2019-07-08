@@ -61,7 +61,7 @@ export default class NavBar extends Component {
                       </Nav>
                       <Nav>
                           <LinkContainer to={{ pathname: '/edit_appointments', state: {currentLogin: this.props.currentLogin, loginStatus: this.props.loginStatus } }}>
-                              <NavItem eventKey={3}>Data form </NavItem>
+                              <NavItem eventKey={3}>Edit appointments</NavItem>
                           </LinkContainer>
                       </Nav>
                       <Nav pullRight>

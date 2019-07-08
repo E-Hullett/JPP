@@ -3,7 +3,7 @@ import NavBar from "../widgets/NavBar";
 import {Button, ControlLabel, FormControl, FormGroup, Checkbox} from "react-bootstrap";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-
+import moment from 'moment'
 
 export default class DataForm extends Component {
     constructor(props) {
@@ -27,7 +27,10 @@ export default class DataForm extends Component {
             isDisabled: false,
         }
     }
-
+    componentDidMount() {
+        let errorList = ["No error check yet performed"]
+        this.setState({errorList: errorList})
+    }
 
     validateForm() {
         //If problems are picked up return false
@@ -37,10 +40,32 @@ export default class DataForm extends Component {
     validateCheck = () => {
         let AF = this.state.appointmentData
         let errorList = []
+        let textEntryList = [AF.title, AF.breedStandard, AF.coatRemoval, AF.date, AF.startTimeHours, AF.startTimeMinutes, AF.notes]
+
+        //Check entry list
+        for(let i=0;i<textEntryList.length;i++) {
+            //Impose higher max character limit for options that may contain lots of text
+            if (i < 3) {
+                if (textEntryList[i].length > 15) {
+                    errorList.push("Unnecessarily long entry");
+                    break
+                }
+            } else if (i > 3) {
+                if (textEntryList[i].length > 2) {
+                    errorList.push("Data for appointment start time too long");
+                    break
+                }
+            }
+        }
+            if (AF.startTimeHours === ""){errorList.push("No appointment start time hours entered")
+            }else {
+                if (!(/^\d*$/.test(AF.startTimeHours) && (parseInt(AF.startTimeHours) <= 24)))  {errorList.push("Input for appointment start time hours is invalid")}
+                if (!(/^\d*$/.test(AF.startTimeMinutes) && (parseInt(AF.startTimeMinutes) <= 60)))  {errorList.push("Input for appointment start time minutes is invalid")}
+            }
+        if (typeof AF.date == "undefined") errorList.push("Date of appointment is invalid")
 
         this.setState({errorList: errorList})
     }
-
 
     //Entries
     handleChange = event => {
@@ -52,7 +77,7 @@ export default class DataForm extends Component {
     //Checkboxes
     handleToggle = event => {
         //...State is set so that only the required property is changed, hence not triggering controlled -> uncontrolled react error
-        this.setState({dataForm: {...this.state.appointmentData, [event.target.id]: event.target.checked}})
+        this.setState({appointmentData: {...this.state.appointmentData, [event.target.id]: event.target.checked}})
         //console.log(event.target.checked)
     }
 
@@ -60,14 +85,9 @@ export default class DataForm extends Component {
     handleDayChange = (selectedDay, modifiers, dayPickerInput) => {
         const input = dayPickerInput.getInput();
         //state needs to be sent differently since the normal event object is not passed
-        this.setState((state) => ({appointmentData: {...state.appointmentData, DOB: selectedDay}}))
+        this.setState((state) => ({appointmentData: {...state.appointmentData, date: selectedDay}}))
         this.setState({datePicker: {...this.state.datePicker, [this.state.datePicker.isEmpty]: !input.value.trim()}})
-        this.setState({
-            datePicker: {
-                ...this.state.datePicker,
-                [this.state.datePicker.isDisabled]: modifiers.disabled === true
-            }
-        })
+        this.setState({datePicker: {...this.state.datePicker, [this.state.datePicker.isDisabled]: modifiers.disabled === true}})
     }
 
     handleSubmit = event => {
@@ -76,7 +96,11 @@ export default class DataForm extends Component {
         //Set up a dataForm replica to be updated with the new values, it will then be replaced with the old dataForm
         let appointmentData = {...this.state.appointmentData}
 
-        //dataForm object is passed manually since state batch is not updated quick enougth
+
+        appointmentData.date = moment(this.state.appointmentData.date).format('DD-MM-YYYY');
+        appointmentData.startTime = `${this.state.appointmentData.startTimeHours}:${this.state.appointmentData.startTimeMinutes}:00`
+
+        //appointmentData object is passed manually since state batch is not updated quick enougth
         this.sendData(appointmentData)
     };
 
@@ -118,7 +142,7 @@ export default class DataForm extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <div> Give us the information to contact you</div>
                             <FormGroup controlId="title" bsSize="large">
-                                <ControlLabel>Address</ControlLabel>
+                                <ControlLabel>Appointment title</ControlLabel>
                                 <FormControl
                                     autoFocus
                                     type="text"
@@ -149,6 +173,7 @@ export default class DataForm extends Component {
                                             value={this.state.appointmentData.startTimeMinutes}
                                             onChange={this.handleChange}
                                         />
+                                    </FormGroup>
                                 </div>
                             </div>
 
@@ -162,11 +187,11 @@ export default class DataForm extends Component {
                                     {/*&& `You chose ${this.state.dataForm.DOB.toLocaleDateString()}`} */   }
                                 </p>
                                 <DayPickerInput
-                                    id="DOB"
+                                    id="date"
                                     value={this.state.appointmentData.date}
                                     onDayChange={this.handleDayChange}
                                     dayPickerProps={{
-                                        id: "DOB",
+                                        id: "date",
                                         selectedDays: this.state.appointmentData.date,
                                         disabledDays: {
                                             daysOfWeek: [0, 0],
@@ -185,7 +210,7 @@ export default class DataForm extends Component {
                                 />
                             </FormGroup>
                             <FormGroup controlId="coatRemoval" bsSize="large">
-                                <ControlLabel>Address</ControlLabel>
+                                <ControlLabel>Enter coat removal information</ControlLabel>
                                 <FormControl
                                     autoFocus
                                     type="text"
@@ -197,7 +222,23 @@ export default class DataForm extends Component {
                                 <ControlLabel>Does your dog need a handstrip</ControlLabel>
                                 <Checkbox id="handstrip" checked={this.state.appointmentData.handstrip} onChange={this.handleToggle} > Yes </Checkbox>
                             </FormGroup>
-
+                            <FormGroup controlId="notes" bsSize="large">
+                                <ControlLabel>Enter any notes</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    type="text"
+                                    value={this.state.appointmentData.notes}
+                                    onChange={this.handleChange}
+                                />
+                            </FormGroup>
+                            <Button
+                                block
+                                bsSize="large"
+                                disabled={!this.validateForm()}
+                                type="submit"
+                            >
+                                Register
+                            </Button>
 
                         </form>
                     </div>
