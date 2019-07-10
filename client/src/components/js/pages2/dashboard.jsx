@@ -4,11 +4,13 @@ import NavBar from '../widgets/NavBar'
 //import Jumbotron from '../widgets/Jumbotron'
 import '../../css/dashboard.css'
 import AppointmentCalendar from './BigCalendar'
+import moment from 'moment'
 
 //TODO Find a way to keep the user logged in after the page refreshes (session cookies)
-//TODO Adds events and event booking to calendar, attach event calendar to a new table
+//TODO Adds sampleEvents and event booking to calendar, attach event calendar to a new table
 //TODO Add a way to remove all user data
-//TODO Test appointment data functionality, allow the customer to enter appointments, load events from the appointments API into the calendar
+
+//TODO Load appointmentData returned by promise into the calendar
 
 
 
@@ -17,10 +19,12 @@ export default class Dashboard extends Component {
         super(props);
         //Set the passed state = to the local state
         this.state = this.props.location.state
+        this.state.appointmentData = ""
     }
     componentDidMount(){
         this.retrieveAppointments()
     }
+
     //Get the users appointment data so that it can be displayed in the table
     retrieveAppointments = () => {
         fetch('/api/users/retrieveAppointments', {
@@ -28,7 +32,7 @@ export default class Dashboard extends Component {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({currentLogin: this.state.currentLogin})
         }).then(res => res.json()).then(res => {
-            console.log(res)
+            this.setState({appointmentData: res})
         })
 
     }

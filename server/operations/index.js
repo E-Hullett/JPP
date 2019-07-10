@@ -18,13 +18,23 @@ class Operations{
 
     //
     formatAppointment(appointmentData){
+        //Add time to UTC date for event calendar
+        let date = new Date(appointmentData.date)
+        date.setHours(appointmentData.startTimeHours)
+        date.setMinutes(appointmentData.startTimeMinutes)
+        appointmentData.date = date
+
+        //Format start time
+        appointmentData.startTime = `${appointmentData.startTimeHours}:${appointmentData.startTimeMinutes}:00`
         //Calculate end time of appointment using start time and estimated duration
-        console.log(appointmentData)
         let duration = 1
         appointmentData.endTime = `${(parseInt(appointmentData.startTimeHours) + duration)}:${appointmentData.startTimeMinutes}:00`
+
         //Calculate fee , //TODO change fee based on users stored status (EG discount % for friends)
         let fee = 50
         appointmentData.fee = fee
+
+
         return (appointmentData)
     }
 

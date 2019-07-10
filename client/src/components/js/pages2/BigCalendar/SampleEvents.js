@@ -17,7 +17,7 @@ let beta_appointment_layout = {
 
 }
 
-let events =  [
+let sampleEvents =  [
     {
         id: 0,
         title: 'All Day Event very long title',
@@ -123,5 +123,5 @@ let events =  [
         end: new Date(new Date().setHours(new Date().getHours() + 3))
     }
 ];
-export default events;
+export default sampleEvents;
 //Date parameters: year, month (-1 for the month u want), day, hour, minutes, seconds

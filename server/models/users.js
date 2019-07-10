@@ -129,8 +129,6 @@ class Users {
     static addAppointment(requestBody, callback){
         //Format appointmentData so its ready to insert (apply elements that need to be secure or are changed often server side)
         let appointmentData = op.formatAppointment(requestBody.appointmentData)
-        console.log(appointmentData)
-        console.log(requestBody.currentLogin)
         db.query('INSERT INTO appointments (user_id, title, date, start_time, end_time, breed_standard, coat_removal, handstrip, fee, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
             requestBody.currentLogin.user_id, appointmentData.title, appointmentData.date, appointmentData.startTime,
             appointmentData.endTime, appointmentData.breedStandard, appointmentData.coatRemoval,

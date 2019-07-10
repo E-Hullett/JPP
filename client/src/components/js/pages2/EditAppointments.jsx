@@ -3,7 +3,6 @@ import NavBar from "../widgets/NavBar";
 import {Button, ControlLabel, FormControl, FormGroup, Checkbox} from "react-bootstrap";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import moment from 'moment'
 
 import '../../css/Form.css'
 
@@ -71,7 +70,7 @@ export default class DataForm extends Component {
             }
             if(AF.startTimeMinutes === "") {void(0)
             }else {
-                if (!(/^\d*$/.test(AF.startTimeMinutes) && (parseInt(AF.startTimeMinutes) <= 60))) {
+                if (!(/^\d*$/.test(AF.startTimeMinutes) && (parseInt(AF.startTimeMinutes) <= 59))) {
                     errorList.push("Input for appointment start time minutes is invalid")
                 }
             }
@@ -112,17 +111,15 @@ export default class DataForm extends Component {
         //Set up a dataForm replica to be updated with the new values, it will then be replaced with the old dataForm
         let appointmentData = {...this.state.appointmentData}
 
-
-        appointmentData.date = moment(this.state.appointmentData.date).format('DD-MM-YYYY');
-        appointmentData.startTime = `${this.state.appointmentData.startTimeHours}:${this.state.appointmentData.startTimeMinutes}:00`
+        //Better to format later since Postgres will return original format regardless
+        //appointmentData.date = moment(this.state.appointmentData.date).format('DD-MM-YYYY');
+        //Other data processing moved server side for flexibility and security
 
         //appointmentData object is passed manually since state batch is not updated quick enougth, also avoid mutation of state if request unsuccessful
         this.sendData(appointmentData)
     };
 
     sendData = (appointmentData) => {
-        //console.log(dataForm)
-        //Send data to postgres server
         fetch('/api/users/addAppointment', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
