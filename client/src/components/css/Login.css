@@ -2,7 +2,11 @@
     font-size: 40px;
     color: red;
 }
-
+#feedbackParagraph {
+    white-space: pre;
+    font-size: 15px;
+    color: red
+}
 
 @media all and (min-width: 480px) {
     .Login {

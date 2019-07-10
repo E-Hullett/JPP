@@ -5,12 +5,14 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import moment from 'moment'
 
+import '../../css/Form.css'
+
 export default class DataForm extends Component {
     constructor(props) {
         super(props);
         //Set the passed state = to the local state (to get login details)
         this.state = this.props.location.state;
-        this.state.validationErrors = [];
+        this.state.errorFeedback = "";
         this.state.errorList = []
         this.state.appointmentData = {
             title: "",
@@ -40,17 +42,21 @@ export default class DataForm extends Component {
     validateCheck = () => {
         let AF = this.state.appointmentData
         let errorList = []
-        let textEntryList = [AF.title, AF.breedStandard, AF.coatRemoval, AF.date, AF.startTimeHours, AF.startTimeMinutes, AF.notes]
+        let textEntryList = [AF.title, AF.breedStandard, AF.coatRemoval, AF.date, AF.notes, AF.startTimeHours, AF.startTimeMinutes]
+        //Check non-optional enteries that are blank
+        if(AF.title === "") errorList.push("No title entered");
+        if(AF.date === "") errorList.push("No date entered")
 
-        //Check entry list
+
+        //Check entry list to control amount of characters
         for(let i=0;i<textEntryList.length;i++) {
             //Impose higher max character limit for options that may contain lots of text
             if (i < 3) {
-                if (textEntryList[i].length > 15) {
+                if (textEntryList[i].length > 25) {
                     errorList.push("Unnecessarily long entry");
                     break
                 }
-            } else if (i > 3) {
+            } else if (i > 4) {
                 if (textEntryList[i].length > 2) {
                     errorList.push("Data for appointment start time too long");
                     break
@@ -59,12 +65,22 @@ export default class DataForm extends Component {
         }
             if (AF.startTimeHours === ""){errorList.push("No appointment start time hours entered")
             }else {
-                if (!(/^\d*$/.test(AF.startTimeHours) && (parseInt(AF.startTimeHours) <= 24)))  {errorList.push("Input for appointment start time hours is invalid")}
-                if (!(/^\d*$/.test(AF.startTimeMinutes) && (parseInt(AF.startTimeMinutes) <= 60)))  {errorList.push("Input for appointment start time minutes is invalid")}
+                if (!(/^\d*$/.test(AF.startTimeHours) && (parseInt(AF.startTimeHours) <= 24))) {
+                    errorList.push("Input for appointment start time hours is invalid")
+                }
             }
+            if(AF.startTimeMinutes === "") {void(0)
+            }else {
+                if (!(/^\d*$/.test(AF.startTimeMinutes) && (parseInt(AF.startTimeMinutes) <= 60))) {
+                    errorList.push("Input for appointment start time minutes is invalid")
+                }
+            }
+
         if (typeof AF.date == "undefined") errorList.push("Date of appointment is invalid")
 
         this.setState({errorList: errorList})
+        //Format errorList to display to the user (the \n is picked up by css)
+        this.setState({errorFeedback: errorList.join("\n")})
     }
 
     //Entries
@@ -100,7 +116,7 @@ export default class DataForm extends Component {
         appointmentData.date = moment(this.state.appointmentData.date).format('DD-MM-YYYY');
         appointmentData.startTime = `${this.state.appointmentData.startTimeHours}:${this.state.appointmentData.startTimeMinutes}:00`
 
-        //appointmentData object is passed manually since state batch is not updated quick enougth
+        //appointmentData object is passed manually since state batch is not updated quick enougth, also avoid mutation of state if request unsuccessful
         this.sendData(appointmentData)
     };
 
@@ -135,8 +151,8 @@ export default class DataForm extends Component {
                 <NavBar loginStatus={this.state.loginStatus} currentLogin={this.state.currentLogin} />
                 <div className="container">
                     <h2> Add appointment</h2>
-                    <p id="feedbackParagraph">
-
+                    <p id={"feedbackParagraph"}>
+                        {this.state.errorFeedback}
                     </p>
                     <div className ="FormContainer">
                         <form onSubmit={this.handleSubmit}>
@@ -205,6 +221,7 @@ export default class DataForm extends Component {
                                 <FormControl
                                     autoFocus
                                     type="text"
+                                    placeholder="optional"
                                     value={this.state.appointmentData.breedStandard}
                                     onChange={this.handleChange}
                                 />
@@ -214,6 +231,7 @@ export default class DataForm extends Component {
                                 <FormControl
                                     autoFocus
                                     type="text"
+                                    placeholder="optional"
                                     value={this.state.appointmentData.coatRemoval}
                                     onChange={this.handleChange}
                                 />
@@ -227,6 +245,7 @@ export default class DataForm extends Component {
                                 <FormControl
                                     autoFocus
                                     type="text"
+                                    placeholder="optional"
                                     value={this.state.appointmentData.notes}
                                     onChange={this.handleChange}
                                 />

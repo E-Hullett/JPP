@@ -173,7 +173,7 @@ export default class DataForm extends Component {
         let DF = this.state.dataForm
         let errorList = []
         //Optional and longer entries sorted to the end of textEntryList
-        var textEntryList = [DF.address, DF.petsName, DF.breed, DF.gender, DF.colour, DF.vetName, DF.ECNname,
+        let textEntryList = [DF.address, DF.petsName, DF.breed, DF.gender, DF.colour, DF.vetName, DF.ECNname,
             DF.ECNrelationship, DF.shampoo, DF.OUD, DF.otherContagions, DF.otherHealthImpairments,
             DF.otherBehaviouralAttributes]
         //Check non-optional entries are not blank

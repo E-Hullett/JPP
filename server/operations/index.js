@@ -11,9 +11,21 @@ class Operations{
         }
 
     }
-
+    //Hash password for security
     hashPassword(password){
         return hash.sha256().update(password).digest('hex')
+    }
+
+    //
+    formatAppointment(appointmentData){
+        //Calculate end time of appointment using start time and estimated duration
+        console.log(appointmentData)
+        let duration = 1
+        appointmentData.endTime = `${(parseInt(appointmentData.startTimeHours) + duration)}:${appointmentData.startTimeMinutes}:00`
+        //Calculate fee , //TODO change fee based on users stored status (EG discount % for friends)
+        let fee = 50
+        appointmentData.fee = fee
+        return (appointmentData)
     }
 
 

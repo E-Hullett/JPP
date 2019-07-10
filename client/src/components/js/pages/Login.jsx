@@ -16,12 +16,15 @@ export default class Login extends Component {
             password: "",
             currentLogin: [],
             loginStatus: false,
-            loginLabelText: ""
+            errorFeedback: ""
         };
     }
 
     validateForm(){
-        if (this.state.username < 0 || this.state.password < 0){return false}
+        if (this.state.username < 0 || this.state.password < 0) {
+            this.setState({errorFeedback: "Entries blank"})
+            return false
+        }
         return true
     }
 
@@ -46,12 +49,12 @@ export default class Login extends Component {
                     if (res[0].authResult === true){
                         //For the rest of the program to check if the user is logged in
                         this.setState({loginStatus: true});
-                        //Values of login are saved to state so tehy can be used later
+                        //Values of login are saved to state so they can be used later
                         this.setState({currentLogin: res[0]});
                         //console.log(res[0])
                         //Call the Dashboard component and pass login details via props, these can be accessed in the component via this.props.location.state
                         //console.log("Email and password match: successful login");
-                        this.setState({loginLabelText: `Logged in as: ${res[0].username}`});
+                        this.setState({errorFeedback: `Logged in as: ${res[0].username}`});
 
                         this.props.history.push({
                             pathname: '/dashboard',
@@ -60,19 +63,19 @@ export default class Login extends Component {
 
                         } else if (res[0].authResult === false){
                             //console.log("Correct email but incorrect password");
-                            this.setState({loginLabelText: `Incorrect password for email: ${res[0].email}`})
+                            this.setState({errorFeedback: `Incorrect password for email: ${res[0].email}`})
                         } else{
-                        this.setState({loginLabelText: `Unexpected response from server`})
+                        this.setState({errorFeedback: `Unexpected response from server`})
                         }
 
 
                 })
                 .catch((err) => {
                         //console.log("Email address not identified");
-                        this.setState({loginLabelText: "Something when wrong"})
+                        this.setState({errorFeedback: "Something when wrong"})
                     })
                 //FIXME Add catch for TypeError caused when email is not found
-                //this.setState({loginLabelText: `Email: ${res[0].email}, not identified`})
+                //this.setState({errorFeedback: `Email: ${res[0].email}, not identified`})
 
                 };
 
@@ -110,8 +113,7 @@ export default class Login extends Component {
                             >
                                 Login
                             </Button>
-                            <p className="ErrorLabel">{this.state.loginLabelText}</p>
-                            <p className="ErrorLabel">{this.state.errorList}</p>
+                            <p id="feedbackParagraph">{this.state.errorFeedback}</p>
 
                         </form>
 

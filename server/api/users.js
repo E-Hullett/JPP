@@ -6,8 +6,10 @@ var Users = require('../models/users');
 //Handles HTTP stuff
 var router = express.Router();
 
-//Methods don't overlap[ despite being on the same path because of the different types of methods used (get, post)
+//Methods don't overlap ( despite being on the same path because of the different types of methods used (get, post))
 //Callback (second parameter), takes request and response. Uses city model passing another callback
+//If multiple objects are sent, they will be enclosed within one object, so this object neededs to be passed instead of the body directly
+
 router.post('/login', (req, res) => {
     //console.log(email);
     //console.log("Request made")
@@ -60,7 +62,13 @@ router.post('/retrieveAppointments', (req, res) => {
     });
 });
 
-
+router.post('/addAppointment', (req, res) => {
+    console.log("Add appointment")
+    Users.addAppointment(req.body.dataSubmit, (err, result) => {
+        if (err) return res.json(err);
+        return (res.json(result))
+    });
+});
 
 
 module.exports = router;

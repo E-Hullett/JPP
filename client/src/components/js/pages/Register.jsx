@@ -19,7 +19,7 @@ export default class Login extends Component{
             password: "",
             currentLogin: [],
             loginStatus: false,
-            loginLabelText: "",
+            errorFeedback: "",
             errorList: []
         };
     }
@@ -45,6 +45,7 @@ export default class Login extends Component{
         //Update state with current errors for validateForm and ErrorLabel
         this.setState({errorList: errorList})
         //Show errors to the user
+        this.setState({errorFeedback: errorList.join("\n")})
     }
 
     handleChange = event => {
@@ -66,7 +67,7 @@ export default class Login extends Component{
             .then(res => {
                 //If the email exists then the account is taken, if email is undefined then the database found nothing (hence its free)
                     if(res.emailExists){
-                        this.setState({loginLabelText: `Account for: ${this.state.email} already exists`});
+                        this.setState({errorFeedback: `Account for: ${this.state.email} already exists`});
                     }else if(res.emailExists === false){
                         //Generate ID nad get rid of the hyphens and add to state
                         let userID = uuidv4().replace(/-/g,"")
@@ -81,7 +82,7 @@ export default class Login extends Component{
                             //console.log(res)
                             this.setState({loginStatus: true})
                             this.setState({currentLogin: {id: null, user_id: this.state.user_id,  email: this.state.email, username: this.state.username, password: this.state.password, status: "User"}})
-                            this.setState({loginLabelText: `New user: ${this.state.email}, successfully created`});
+                            this.setState({errorFeedback: `New user: ${this.state.email}, successfully created`});
                             this.props.history.push({
                                 pathname: 'dashboard',
                                 state: { currentLogin: this.state.currentLogin, loginStatus: this.state.loginStatus, }
@@ -93,7 +94,7 @@ export default class Login extends Component{
             .catch((err) => {
                 console.log(err)
                 //console.log("Something when wrong");
-                this.setState({loginLabelText: "Error occurred"})
+                this.setState({errorFeedback: "Error occurred"})
             })
     };
 
@@ -138,8 +139,8 @@ export default class Login extends Component{
                         >
                             Register
                         </Button>
-                        <p className={"ErrorLabel"}>{this.state.loginLabelText}</p>
-                        <p className={"ErrorLabel"}>{this.state.errorList}</p>
+                        <p id={"feedbackParagraph"}>{this.state.errorFeedback}</p>
+
                     </form>
 
                 </div>
