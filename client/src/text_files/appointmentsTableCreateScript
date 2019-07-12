@@ -3,7 +3,8 @@ CREATE TABLE public.appointments
     appointment_id SERIAL,
     user_id character(32) NOT NULL,
     title text,
-    date date,
+    start_date timestamptz,
+    end_date timestamptz,
     start_time time,
     end_time time,
     breed_standard text,
@@ -16,12 +17,6 @@ CREATE TABLE public.appointments
 );
 COMMENT ON TABLE public.appointments
     IS 'Contains customer appointments for JPP';
-
-
-
-
-
-
 
 
 CREATE SEQUENCE appointments_ui;

@@ -1,9 +1,10 @@
 
 /*
+
 import moment from "moment";
 console.log(moment("20/1/2016").format('DD-MM-YYYY'));
- */
 
+tasks.forEach( task => task.start_date = task.start_date.format("YYYY-MM-DD") );
 
 //moment(`${date3} ${time3}`, 'YYYY-MM-DD HH:mm:ss').format()
 
@@ -37,3 +38,5 @@ retrieveAppointments = () => {
 const date3 = '2019-07-18T11:00:00.000Z';
 const time3 = "23:59:59"
 console.log(moment(`${date3} ${time3}`, 'YYYY-MM-DD HH:mm:ss').format())
+
+*/

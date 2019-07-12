@@ -55,7 +55,6 @@ router.post('/dataFormSubmit', (req, res) => {
     }
 });
 router.post('/retrieveAppointments', (req, res) => {
-    console.log("Retrieve the appointments")
     Users.retrieveAppointments(req.body.currentLogin, (err, result) => {
         if (err) return res.json(err);
         return (res.json(result))
@@ -63,7 +62,6 @@ router.post('/retrieveAppointments', (req, res) => {
 });
 
 router.post('/addAppointment', (req, res) => {
-    console.log("Add appointment")
     Users.addAppointment(req.body.dataSubmit, (err, result) => {
         if (err) return res.json(err);
         return (res.json(result))
