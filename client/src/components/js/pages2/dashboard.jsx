@@ -36,7 +36,7 @@ export default class Dashboard extends Component {
             <div>
                 <NavBar loginStatus={this.state.loginStatus} currentLogin={this.state.currentLogin} />
                     <div className="container">
-                        <div id={"AC_Container"}>
+                        <div id="AC_Container">
                             <h2>Appointment calendar</h2>
                             <AppointmentCalendar appointmentDataList={this.state.appointmentDataList}/>
                         </div>

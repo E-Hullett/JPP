@@ -5,11 +5,14 @@
   background-size: 100% auto;
   color: white;
   min-height: 300px;
+  height: 600px;
 }
 
 #JumbtronTitle{
   color: white;
+  font-size: 50px
 }
 #JumbtronSubTitle{
   color: white;
+  font-size: 30px
 }

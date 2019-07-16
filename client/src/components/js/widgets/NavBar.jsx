@@ -5,7 +5,7 @@ import { Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 //Internal/custom imports:
 import '../../css/NavBar.css';
-import * as logo from '../../../images/Mini_Pink_Dog_Face.png';
+import * as logo from '../../../images/MiniPinkDog.png';
 import * as settingsGear from '../../../images/Gear.png'
 //var Img = <img alt="JPP logo" src={'../../../images/Pink_Dog_Face.jpg'} />
 

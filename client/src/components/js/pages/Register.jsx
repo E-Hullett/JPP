@@ -3,7 +3,7 @@ import Footer from '../widgets/Footer.jsx';
 import NavBar from '../widgets/NavBar.jsx';
 //import Jumbotron from '../widgets/Jumbotron.jsx';
 
-import '../../css/Login.css'
+import '../../css/Form.css'
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 const uuidv4 = require('uuid/v4');
 
@@ -97,15 +97,13 @@ export default class Login extends Component{
                 this.setState({errorFeedback: "Error occurred"})
             })
     };
-
-
-
     render(){
         return (
-            <div className="Login" id="Bella">
+            <div className="Login" id="AuthContainer">
                 <NavBar />
-                <div className ="FormContainer">
-                    <form onSubmit={this.handleSubmit}>
+                <div className ="Container">
+                    <form onSubmit={this.handleSubmit} className="FormBox">
+                        <h1 className="FormHeader"> LOGIN </h1>
                         <FormGroup controlId="email" bsSize="large">
                             <ControlLabel>Email</ControlLabel>
                             <FormControl
@@ -142,6 +140,7 @@ export default class Login extends Component{
                         <p id={"feedbackParagraph"}>{this.state.errorFeedback}</p>
 
                     </form>
+
 
                 </div>
                 <Footer />
