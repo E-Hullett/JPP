@@ -1,6 +1,6 @@
-# Example reactjs project with express and posgreSQL backend
+# example reactjs project with express and posgreSQL backend
 
-## Technologies
+## technologies
 - front
     - framework: React.js
     - components: React-Bootstrap
